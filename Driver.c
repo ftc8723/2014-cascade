@@ -72,3 +72,15 @@ void joystickControl() {
 		motor[leftMotor] = 0;											// ...stop the left side of the robot.
 	}
 }
+
+void drive(){
+	while(true)
+	{
+		//Get the Latest joystick values
+		getJoystickSettings(joystick);
+
+		if (!hatSwitchControl()){
+			joystickControl();
+		}
+	}
+}
