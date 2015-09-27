@@ -7,14 +7,8 @@
 #pragma config(Motor,  mtr_S1_C1_1,     leftMotor,     tmotorTetrix, openLoop, reversed, encoder)
 #pragma config(Motor,  mtr_S1_C1_2,     rightMotor,    tmotorTetrix, openLoop, encoder)
 #pragma config(Motor,  mtr_S1_C3_1,     raiseMotor,    tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C3_2,     motorG,        tmotorTetrix, openLoop)
 #pragma config(Servo,  srvo_S1_C2_1,    rightHook,            tServoStandard)
 #pragma config(Servo,  srvo_S1_C2_2,    leftHook,             tServoStandard)
-#pragma config(Servo,  srvo_S1_C2_3,    servo3,               tServoNone)
-#pragma config(Servo,  srvo_S1_C2_4,    servo4,               tServoNone)
-#pragma config(Servo,  srvo_S1_C2_5,    servo5,               tServoNone)
-#pragma config(Servo,  srvo_S1_C2_6,    servo6,               tServoNone)
-
 
 #include "JoystickDriver.c"
 
@@ -48,7 +42,13 @@ void manipulators() {
 	}
 }
 
-void raiseHooks(){
-	servo[righthook] = 0;
-	servo[leftHook] = 0;
+void moveHooks(){
+	if(joy1Btn(1) = 1) {
+		servo[rightHook] = 0;
+		servo[leftHook] = 0;
+	}
+	else if(joy1Btn(0) == 1) {
+		servo[rightHook] = 127;
+		servo[leftHook] = 127;
+	}
 }
