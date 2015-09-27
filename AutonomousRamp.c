@@ -88,20 +88,19 @@ void autonomous()
 	long rampStartTime = nSysTime;
 	writeDebugStreamLine("the time is %d", rampStartTime);
 
-	if((ramp == 0) || (ramp == 3)){
-		//go to the bottom of ramp
-		while(lightchanges < 4) //runs loop until the light sensor output changes 4 times
-		{
-			motor[rightMotor] = 50;
-			motor[leftMotor] = 50;
-			if (lightvalue != lastvalue){//does the following if the light reading has changed
-				writeDebugStreamLine("light is %f", lightvalue);
-				lastvalue = lightvalue;
-				lightchanges++;
-			}
-			lightvalue = SensorValue(light);//changes lightvalue to the current reading
+	//go to the bottom of ramp
+	while(lightchanges < 4) //runs loop until the light sensor output changes 4 times
+	{
+		motor[rightMotor] = 50;
+		motor[leftMotor] = 50;
+		if (lightvalue != lastvalue){//does the following if the light reading has changed
+			writeDebugStreamLine("light is %f", lightvalue);
+			lastvalue = lightvalue;
+			lightchanges++;
 		}
+		lightvalue = SensorValue(light);//changes lightvalue to the current reading
 	}
+
 	//computes the time taken to get off the ramp(in sec)
 	long rampEndTime = nSysTime;
 	long rampTaken = (rampEndTime - rampStartTime) / 1000;
@@ -111,24 +110,25 @@ void autonomous()
 	long irTime = nSysTime;
 	writeDebugStreamLine("the start time for IR is %d", irTime);
 
-	int IRV = SensorValue(IRSeeker);
-	writeDebugStreamLine("the ir is %d", IRV);
+	//int IRV = SensorValue(IRSeeker);
+	//writeDebugStreamLine("the ir is %d", IRV);
 
-	if(SensorValue(IRSeeker) == 5){
-		irTurnTo('r', 4);
-		driveForward(7000);
-		turnFor('l', 2000);
-	}
-	else{
-		turnFor('l', 1000);
-		irTurnTo('l', 5);
-		driveForward(2000);
-		irTurnTo('l', 6);
-		driveForward(3000);
-	}
+	//if(SensorValue(IRSeeker) == 5){
+	//	irTurnTo('r', 4);
+	//	driveForward(7000);
+	//	turnFor('l', 2000);
+	//}
+	//else{
+	//	turnFor('l', 1000);
+	//	irTurnTo('l', 5);
+	//	driveForward(2000);
+	//	irTurnTo('l', 6);
+	//	driveForward(3000);
+	//}
 
-	//find the time taken for the ir in sec
-	long irEndTime = nSysTime;
-	long irTaken = (irEndTime - irTime) / 1000;
-	writeDebugStreamLine("the IR time taken is %d", irTaken);
+	////find the time taken for the ir in sec
+	//long irEndTime = nSysTime;
+	//long irTaken = (irEndTime - irTime) / 1000;
+	//writeDebugStreamLine("the IR time taken is %d", irTaken);
+
 }
