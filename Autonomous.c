@@ -17,35 +17,34 @@
 
 #pragma debuggerWindows("debugStream");
 #pragma debuggerWindows("joystickSimple");
+#include "Utilities.c"
 
 void autonomousFloor()
 {
 	writeDebugStreamLine("start autonomousFloor");
-	nxtDisplayTextLine(0, "running autonomous floor");
+	displayTextLine(0, "running autonomous floor");
 
 	//takes a start time for the ir mission
 	long irTime = nSysTime;
 	int IRV = SensorValue(IRSeeker);
 	writeDebugStreamLine("starting IR = %d", IRV);
 
-	if(SensorValue(IRSeeker) == 5){
-		//red facing
-		//now ir facing
+	if(SensorValue(IRSeeker) == 5){ // approach middle structure, jog right, knock over pole
+		//ir facing
 		driveForward(1000);
 		turnRightFor(1000);
 		driveForward(1400);
 		turnLeftFor(1000);
 		driveForward(2000);
 	}
-	else if(SensorValue(IRSeeker) == 6){
-		//in the middle
-		//now facing ramp
+	else if(SensorValue(IRSeeker) == 6){ // approach structure, angle right, knock over pole
+		//facing ramp
 		turnRightToIR(2);
 		driveForward(2000);
 	}
-	else if(SensorValue(IRSeeker) == 7){
-		//blue facing
-	//now pole facing
+	else if(SensorValue(IRSeeker) == 7){ //ram pole
+		//pole facing
+		driveFull(1000);
 	}
 
 	//find the time taken for the ir in sec
@@ -86,6 +85,10 @@ void autonomousRamp()
 	//drives to 20 cm away from the closest object
 
 	//lower hooks
-	servo[leftHook] = 37;
-	servo[rightHook] = 90;
+	lowerHooks();
+}
+
+task main {
+	//autonomousFloor();
+	autonomousRamp();
 }

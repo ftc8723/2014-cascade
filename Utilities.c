@@ -86,3 +86,17 @@ void turnRightFor(int timeInMs) {
 		currentTime = nSysTime;
 	}
 }
+
+void raiseHooks(){
+		// raise
+		servo[rightHook] = 90;
+		servo[leftHook] = 109;
+		writeDebugStreamLine("raising hooks");
+}
+
+void lowerHooks(){
+		//lower
+		servo[rightHook] = 30;
+		servo[leftHook] = 176;
+		writeDebugStreamLine("lowering hooks");
+}
