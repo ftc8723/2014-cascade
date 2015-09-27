@@ -1,17 +1,3 @@
-#pragma config(Hubs,  S1, HTMotor,  HTServo,  HTMotor,  none)
-#pragma config(Sensor, S1,     ,               sensorI2CMuxController)
-#pragma config(Sensor, S2,     IRSeeker,       sensorHiTechnicIRSeeker1200)
-#pragma config(Sensor, S3,     light,          sensorLightActive)
-#pragma config(Sensor, S4,     sonar,          sensorNone)
-#pragma config(Motor,  motorA,          ziptiesMotor,  tmotorNXT, PIDControl, encoder)
-#pragma config(Motor,  mtr_S1_C1_1,     leftMotor,     tmotorTetrix, openLoop, reversed, encoder)
-#pragma config(Motor,  mtr_S1_C1_2,     rightMotor,    tmotorTetrix, openLoop, encoder)
-#pragma config(Motor,  mtr_S1_C3_1,     raiseMotor,    tmotorTetrix, openLoop)
-#pragma config(Servo,  srvo_S1_C2_1,    rightHook,            tServoStandard)
-#pragma config(Servo,  srvo_S1_C2_2,    leftHook,             tServoStandard)
-
-#include "JoystickDriver.c"
-
 void manipulators() {
 	//Arm Motor Control
 	if(joy1Btn(5) == 1)       // If button 5 (LB) is pressed...
@@ -27,7 +13,7 @@ void manipulators() {
 		motor[raiseMotor] = 0;      // ...stop the elevator.
 	}
 
-	//Gripper Motor Control
+	//Zipties Motor Control
 	if(joy1Btn(6) == 1)       // If button 6 (RB)is pressed...
 	{
 		motor[ziptiesMotor] = 50;     // ...suck in the balls.
@@ -40,15 +26,15 @@ void manipulators() {
 	{
 		motor[ziptiesMotor] = 0;      // ...stop the zipties.
 	}
-}
 
-void moveHooks(){
-	if(joy1Btn(1) = 1) {
-		servo[rightHook] = 0;
-		servo[leftHook] = 0;
-	}
+	// Raise or lower the hooks for grabbing the rolling goals
+	if(joy1Btn(1) == 1) {
+		// raise
+		servo[rightHook] = 37;
+		servo[leftHook] = 90;
+	} // lowers
 	else if(joy1Btn(0) == 1) {
-		servo[rightHook] = 127;
-		servo[leftHook] = 127;
+		servo[rightHook] = 90;
+		servo[leftHook] = 37;
 	}
 }
