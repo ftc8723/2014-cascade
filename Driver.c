@@ -9,7 +9,7 @@ void drive() {
 
 bool hatSwitchControl() {
 	int hatValue = joystick.joy1_TopHat;
-	writeDebugStreamLine("running hat program, value is %d", hatValue);
+	//writeDebugStreamLine("running hat program, value is %d", hatValue);
 	if(hatValue == -1){
 		return false;
 	}

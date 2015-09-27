@@ -21,25 +21,12 @@
 #include "JoystickDriver.c"
 #include "Utilities.c"
 #include "Driver.c"
-#include "Autonomous.c"
 #include "Manipulators.c"
 
 task main()
 {
 	//waitForStart();
 	allstop();
-
-	// autonomous runs up to 30 seconds from start
-	unsigned long programStart = nSysTime;
-	unsigned long autonomousEnd = programStart + 15000;
-
-	// run the right autonomous program
-	autonomousFloor();
-	//autonomousRamp();
-	allstop();
-
-	// stop until the autonomous period is over
-	//waitUntil(autonomousEnd);
 
 	// loop while we drive and run manipulatorss
 	int previousIR = -1;
