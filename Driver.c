@@ -1,5 +1,6 @@
-#pragma config(Motor,  mtr_S1_C1_1,     rightMotor,    tmotorTetrix, openLoop, encoder)
-#pragma config(Motor,  mtr_S1_C1_2,     leftMotor,     tmotorTetrix, openLoop, reversed, encoder)
+#pragma config(Hubs,  S1, HTMotor,  HTMotor,  none,     none)
+#pragma config(Motor,  mtr_S1_C1_1,     rightMotor,    tmotorTetrix, openLoop, reversed, encoder)
+#pragma config(Motor,  mtr_S1_C1_2,     leftMotor,     tmotorTetrix, openLoop, encoder)
 #include "JoystickDriver.c"
 
 bool hatSwitchControl() {
@@ -10,8 +11,8 @@ bool hatSwitchControl() {
 	}
 	else if(hatValue == 0) {
 		//forward
-		motor[rightMotor] = 50;
-		motor[leftMotor] = 50;
+		motor[rightMotor] = 100;
+		motor[leftMotor] = 100;
 	}
 	else if(hatValue == 1) {
 		//forward-right
@@ -30,8 +31,8 @@ bool hatSwitchControl() {
 	}
 	else if(hatValue == 4) {
 		//back
-		motor[rightMotor] = -50;
-		motor[leftMotor] = -50;
+		motor[rightMotor] = -100;
+		motor[leftMotor] = -100;
 	}
 	else if(hatValue == 5) {
 		//back-left
@@ -70,17 +71,5 @@ void joystickControl() {
 	else                                      // Else the readings are within the threshold, so...
 	{
 		motor[leftMotor] = 0;											// ...stop the left side of the robot.
-	}
-}
-
-void drive(){
-	while(true)
-	{
-		//Get the Latest joystick values
-		getJoystickSettings(joystick);
-
-		if (!hatSwitchControl()){
-			joystickControl();
-		}
 	}
 }

@@ -16,11 +16,19 @@
 task main()
 {
 	long autonomousStart = nSysTime;
-	autonomous();
-	while(nSysTime - autonomousStart < 30000) {
+	//autonomous();
+	while(nSysTime - autonomousStart < 3000) {
 		wait1Msec(250);
 	}
-	if (!drive()){
-		manipulators();
+
+	while(true)
+	{
+		//Get the Latest joystick values
+		getJoystickSettings(joystick);
+
+		if (!hatSwitchControl()){
+			joystickControl();
+		}
+		//manipulators();
 	}
 }
