@@ -5,8 +5,8 @@
 #pragma config(Motor,  motorA,          gripperMotor,  tmotorNXT, PIDControl, encoder)
 #pragma config(Motor,  mtr_S1_C1_1,     rightMotor,    tmotorTetrix, openLoop, encoder)
 #pragma config(Motor,  mtr_S1_C1_2,     leftMotor,     tmotorTetrix, openLoop, reversed, encoder)
-#pragma config(Motor,  mtr_S1_C2_1,     unused,        tmotorTetrix, openLoop, encoder)
-#pragma config(Motor,  mtr_S1_C2_2,     unUsed,        tmotorTetrix, openLoop, encoder)
+#pragma config(Motor,  mtr_S1_C2_1,     raiseMotor,    tmotorTetrix, openLoop, encoder)
+#pragma config(Motor,  mtr_S1_C2_2,     ziptiesMotor,  tmotorTetrix, openLoop, encoder)
 
 //#pragma debuggerWindows("joystickSimple");
 #include "Driver.c"
@@ -20,5 +20,7 @@ task main()
 	while(nSysTime - autonomousStart < 30000) {
 		wait1Msec(250);
 	}
-	drive();
+	if (!drive()){
+		manipulators();
+	}
 }
