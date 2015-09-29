@@ -3,59 +3,69 @@ void joystickControl();
 
 void drive() {
 	if(!hatSwitchControl()) {
-		joystickControl();
+		//joystickControl();
 	}
 }
 
+int oldHat = -1;
+
 bool hatSwitchControl() {
 	int hatValue = joystick.joy1_TopHat;
-	//writeDebugStreamLine("running hat program, value is %d", hatValue);
-	if(hatValue == -1){
-		return false;
+	if (hatValue != oldHat) {
+		writeDebugStreamLine("hatvalue is %d", hatValue);
+		oldHat = hatValue;
 	}
-	else if(hatValue == 0) {
-		//forward
+
+	switch (hatValue) {
+	case 0:
 		motor[rightMotor] = 100;
 		motor[leftMotor] = 100;
-	}
-	else if(hatValue == 1) {
-		//forward-right
+		break;
+	case 1:
+		//forward right
 		motor[rightMotor] = 10;
 		motor[leftMotor] = 40;
-	}
-	else if(hatValue == 2) {
+		break;
+	case 2:
 		//turn right
 		motor[rightMotor] = -50;
 		motor[leftMotor] = 50;
-	}
-	else if(hatValue == 3) {
+		break;
+	case 3:
 		//back-right
 		motor[rightMotor] = -10;
 		motor[leftMotor] = -40;
-	}
-	else if(hatValue == 4) {
+		break;
+	case 4:
 		//back
 		motor[rightMotor] = -100;
 		motor[leftMotor] = -100;
-	}
-	else if(hatValue == 5) {
+		break;
+	case 5:
 		//back-left
 		motor[rightMotor] = -40;
 		motor[leftMotor] = -10;
-	}
-	else if(hatValue == 6) {
+		break;
+	case 6:
 		//turn left
 		motor[rightMotor] = 50;
 		motor[leftMotor] = -50;
-	}
-	else if(hatValue == 7) {
+		break;
+	case 7:
 		//forward-left
 		motor[rightMotor] = 40;
 		motor[leftMotor] = 10;
+		break;
+	default:
+		motor[rightMotor] = 0;
+		motor[leftMotor] = 0;
+		break;
 	}
-	return true;
+	return (hatValue != -1);
 }
+
 void joystickControl() {
+
 	//Integer variable that allows you to specify a "deadzone" where values (both positive or negative)
 	//less than the threshold will be ignored.
 	int threshold = 10;

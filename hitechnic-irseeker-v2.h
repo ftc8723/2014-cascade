@@ -4,7 +4,7 @@
  * HiTechnic IR Seeker V2
  * @{
  */
- 
+
 /*
  * $Id: hitechnic-irseeker-v2.h 133 2013-03-10 15:15:38Z xander $
  */
