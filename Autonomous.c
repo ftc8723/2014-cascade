@@ -27,26 +27,32 @@ void autonomousFloor()
 	long irTime = nSysTime;
 	int IRV = SensorValue(IRSeeker);
 	writeDebugStreamLine("starting IR = %d", IRV);
-	driveForward(1000);
 	displayBigTextLine(3, "LN32:%d", SensorValue(IRSeeker));
+	raiseHooksFar();
 
-	if(SensorValue(IRSeeker) == 5){ // approach middle structure, jog right, knock over pole
+	if(SensorValue(IRSeeker) == 5){ // approach middle structure, jog right, knock over pole //
 		//ir facing
+		writeDebugStreamLine("Position 1");
 		driveForward(1000);
-		turnRightFor(1000);
-		driveForward(1400);
-		turnLeftFor(1000);
+		turnLeftFor(750);
+		driveForward(900);
+		turnRightFor(750);
 		driveFull(2000);
 	}
 	else if(SensorValue(IRSeeker) == 6){ // approach structure, angle right, knock over pole
 		//facing ramp
-		driveForward(1000);
-		turnRightToIR(2);
-		driveForward(2000);
+		writeDebugStreamLine("Position 2");
+		driveForward(1100);
+		turnLeftToIR(7);
+		driveFull(1000);
 	}
-	else if(SensorValue(IRSeeker) == 7){ //ram pole
+	else if(SensorValue(IRSeeker) == 7){ //ram pole from side
 		//pole facing
-		driveWithin(5);
+		writeDebugStreamLine("Position 3");
+		driveWithin(13);
+		turnRightFor(532);
+		writeDebugStreamLine("turning");
+		wait1Msec(500);
 	}
 
 	//find the time taken for the ir in sec
@@ -58,11 +64,10 @@ void autonomousFloor()
 void autonomousRamp()
 {
 	raiseHooks();
-	wait1Msec(500);
 	lowerHooks();
-	wait1Msec(500);
 	raiseHooks();
-	int lightvalue = SensorValue(light);
+
+	//int lightvalue = SensorValue(light);
 	int lastvalue = 0;
 	int lightchanges = 0;
 
@@ -89,13 +94,15 @@ void autonomousRamp()
 	writeDebugStreamLine("the ramp time taken is %d", rampTaken);
 
 	wait1Msec(1000);
-	driveWithin(17);
-	writeDebugStreamLine("I LIKE TURTLES, BRUH");
+	driveWithin(19);
+
 	//lowers hooks
-	lowerHooks(); //WHY ISNT THIS THING WORKING
+	lowerHooks();
+	turnLeftFor(2089);
+	driveForward(4500);
 }
 
 task main {
-	//autonomousFloor();
-	autonomousRamp();
+	autonomousFloor();
+	//autonomousRamp();
 }

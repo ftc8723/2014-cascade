@@ -44,7 +44,7 @@ task main()
 
 		int currentIR = SensorValue(IRSeeker);
 		if (currentIR != previousIR){
-			displayTextLine(1, "IR is %d", currentIR);
+			displayTextLine(2, "IR is %d", currentIR);
 			previousIR = currentIR;
 		}
 		int currentLight = SensorValue(light);
@@ -54,7 +54,7 @@ task main()
 		}
 		int currentSonar = SensorValue(sonar);
 		if (currentSonar != previousSonar){
-			displayTextLine(2, "Sonar is %d", currentSonar);
+			displayTextLine(4, "Sonar is %d", currentSonar);
 			previousSonar = currentSonar;
 		}
 

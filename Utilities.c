@@ -92,6 +92,7 @@ void raiseHooks(){
 		servo[rightHook] = 90;
 		servo[leftHook] = 109;
 		writeDebugStreamLine("raising hooks");
+		wait1Msec(500);
 }
 
 void lowerHooks(){
@@ -99,4 +100,23 @@ void lowerHooks(){
 		servo[rightHook] = 30;
 		servo[leftHook] = 176;
 		writeDebugStreamLine("lowering hooks");
+		wait1Msec(500);
+}
+
+void driveBack(int timeRunning){
+	long startTime = nSysTime;
+	long currentTime = startTime;
+	while(currentTime < startTime+timeRunning){
+		motor[leftMotor] = -50;
+		motor[rightMotor] = -50;
+		currentTime = nSysTime;
+	}
+}
+
+void raiseHooksFar(){
+		// raise
+		servo[rightHook] = 207;
+		servo[leftHook] = 2;
+		writeDebugStreamLine("raising hooks");
+		wait1Msec(500);
 }
