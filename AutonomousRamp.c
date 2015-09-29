@@ -19,53 +19,6 @@
 #include "Utilities.c"
 #include "JoystickDriver.c"
 
-void autonomousFloor()
-{
-	writeDebugStreamLine("start autonomousFloor");
-	displayTextLine(0, "running autonomous floor");
-
-	//takes a start time for the ir mission
-	long irTime = nSysTime;
-	int IRV = SensorValue(IRSeeker);
-	writeDebugStreamLine("starting IR = %d", IRV);
-	displayBigTextLine(3, "LN32:%d", SensorValue(IRSeeker));
-	raiseHooksFar();
-
-	// Jared: consider driving forward a little first to see if this differentiates IR values
-
-	if(IRV == 5){ // approach middle structure, jog right, knock over pole //5
-		//ir facing
-		writeDebugStreamLine("Position 1");
-		driveForward(1000);
-		turnRightFor(750);
-		driveForward(900);
-		turnLeftFor(750);
-		driveFull(2000);
-	}
-	else if(IRV == 6){ // approach structure, angle right, knock over pole //5
-		//facing ramp
-		writeDebugStreamLine("Position 2");
-
-		driveForward(1100);
-		turnRightToIR(7);
-		driveFull(1000);
-	}
-	else if(IRV == 7){ //ram pole from side
-		//pole facing
-		writeDebugStreamLine("Position 3");
-		driveWithin(13);
-		turnRightFor(532);
-		writeDebugStreamLine("turning");
-		wait1Msec(500);
-	}
-
-	//find the time taken for the ir in sec
-	//Jared: what does this do - is this needed?
-	long irEndTime = nSysTime;
-	long irTaken = (irEndTime - irTime) / 1000;
-	writeDebugStreamLine("the IR time taken is %d", irTaken);
-}
-
 void autonomousRamp()
 {
 	raiseHooks();
@@ -128,6 +81,5 @@ void autonomousRamp()
 
 task main {
 	waitForStart();
-	//autonomousFloor();
 	autonomousRamp();
 }

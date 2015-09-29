@@ -24,8 +24,6 @@ void autonomousFloor()
 	writeDebugStreamLine("start autonomousFloor");
 	displayTextLine(0, "running autonomous floor");
 
-	//takes a start time for the ir mission
-	long irTime = nSysTime;
 	int IRV = SensorValue(IRSeeker);
 	writeDebugStreamLine("starting IR = %d", IRV);
 	displayBigTextLine(3, "LN32:%d", SensorValue(IRSeeker));
@@ -55,60 +53,12 @@ void autonomousFloor()
 		writeDebugStreamLine("Position 3");
 		driveWithin(13);
 		turnRightFor(532);
-		writeDebugStreamLine("turning");
+		driveFull(500);
 		wait1Msec(500);
 	}
-
-	//find the time taken for the ir in sec
-	//Jared: what does this do - is this needed?
-	long irEndTime = nSysTime;
-	long irTaken = (irEndTime - irTime) / 1000;
-	writeDebugStreamLine("the IR time taken is %d", irTaken);
-}
-
-void autonomousRamp()
-{
-	raiseHooks();
-	lowerHooks();
-	raiseHooks();
-
-	//int lightvalue = SensorValue(light);
-	int lastvalue = 0;
-	int lightchanges = 0;
-
-	//takes the time when ramp started
-	long rampStartTime = nSysTime;
-	writeDebugStreamLine("the time is %d", rampStartTime);
-
-	//go to the bottom of ramp
-	//while(lightchanges < 1) //runs loop until the light sensor output changes 4 times
-	//{
-	//	motor[rightMotor] = 50;
-	//	motor[leftMotor] = 50;
-	//	if (lightvalue != lastvalue){//does the following if the light reading has changed
-	//		writeDebugStreamLine("light is %f", lightvalue);
-	//		lastvalue = lightvalue;
-	//		lightchanges++;
-	//	}
-	//	lightvalue = SensorValue(light);//changes lightvalue to the current reading
-	//}
-
-	//computes the time taken to get off the ramp(in sec)
-	long rampEndTime = nSysTime;
-	long rampTaken = (rampEndTime - rampStartTime) / 1000;
-	writeDebugStreamLine("the ramp time taken is %d", rampTaken);
-
-	wait1Msec(1000);
-	driveWithin(19);
-
-	//lowers hooks
-	lowerHooks();
-	turnLeftToIR(7);
-	driveForward(4500);
 }
 
 task main {
 	waitForStart();
 	autonomousFloor();
-	//autonomousRamp();
 }

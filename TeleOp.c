@@ -25,7 +25,7 @@
 
 task main()
 {
-	waitForStart();
+//	waitForStart();
 	allstop();
 
 	// loop while we drive and run manipulatorss
