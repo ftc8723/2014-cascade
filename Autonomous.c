@@ -30,23 +30,26 @@ void autonomousFloor()
 	displayBigTextLine(3, "LN32:%d", SensorValue(IRSeeker));
 	raiseHooksFar();
 
-	if(SensorValue(IRSeeker) == 5){ // approach middle structure, jog right, knock over pole //
+	// Jared: consider driving forward a little first to see if this differentiates IR values
+
+	if(IRV == 5){ // approach middle structure, jog right, knock over pole //5
 		//ir facing
 		writeDebugStreamLine("Position 1");
 		driveForward(1000);
-		turnLeftFor(750);
-		driveForward(900);
 		turnRightFor(750);
+		driveForward(900);
+		turnLeftFor(750);
 		driveFull(2000);
 	}
-	else if(SensorValue(IRSeeker) == 6){ // approach structure, angle right, knock over pole
+	else if(IRV == 6){ // approach structure, angle right, knock over pole //5
 		//facing ramp
 		writeDebugStreamLine("Position 2");
+
 		driveForward(1100);
-		turnLeftToIR(7);
+		turnRightToIR(7);
 		driveFull(1000);
 	}
-	else if(SensorValue(IRSeeker) == 7){ //ram pole from side
+	else if(IRV == 7){ //ram pole from side
 		//pole facing
 		writeDebugStreamLine("Position 3");
 		driveWithin(13);
@@ -56,6 +59,7 @@ void autonomousFloor()
 	}
 
 	//find the time taken for the ir in sec
+	//Jared: what does this do - is this needed?
 	long irEndTime = nSysTime;
 	long irTaken = (irEndTime - irTime) / 1000;
 	writeDebugStreamLine("the IR time taken is %d", irTaken);
@@ -98,11 +102,12 @@ void autonomousRamp()
 
 	//lowers hooks
 	lowerHooks();
-	turnLeftFor(2089);
+	turnLeftFor(2050);
 	driveForward(4500);
 }
 
 task main {
+	//waitForStart();
 	autonomousFloor();
 	//autonomousRamp();
 }
