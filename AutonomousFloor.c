@@ -17,6 +17,7 @@
 #pragma debuggerWindows("debugStream");
 #pragma debuggerWindows("joystickSimple");
 #include "Utilities.c"
+#include "JoystickDriver.c"
 
 void autonomousFloor()
 {
@@ -37,7 +38,7 @@ void autonomousFloor()
 		writeDebugStreamLine("Position 1");
 		driveForward(1000);
 		turnRightFor(750);
-		driveForward(900);
+		driveForward(600);
 		turnLeftFor(750);
 		driveFull(2000);
 	}
@@ -49,7 +50,7 @@ void autonomousFloor()
 		turnRightToIR(7);
 		driveFull(1000);
 	}
-	else if(IRV == 7){ //ram pole from side
+	else{ //ram pole from side
 		//pole facing
 		writeDebugStreamLine("Position 3");
 		driveWithin(13);
@@ -102,12 +103,12 @@ void autonomousRamp()
 
 	//lowers hooks
 	lowerHooks();
-	turnLeftFor(2050);
+	turnLeftToIR(7);
 	driveForward(4500);
 }
 
 task main {
-	//waitForStart();
+	waitForStart();
 	autonomousFloor();
 	//autonomousRamp();
 }
