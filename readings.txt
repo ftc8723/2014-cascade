@@ -1,0 +1,11 @@
+position 3
+IRL = 5
+IRR = 5
+
+position 2
+IRL = 5
+IRR = 6
+
+position 1
+IRL = 5 or 6
+IRR = 6 or 7

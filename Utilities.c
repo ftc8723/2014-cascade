@@ -40,30 +40,30 @@ void driveFull(int timeRunning){
 }
 
 //void irTurnBy(int turnBy){
-//	int irVal = (SensorValue(IRSeeker));
+//	int irVal = (HTIRS2readDCDir(IRL));
 //	int initialIrVal = irVal;
 //	while(irVal != initialIrVal+turnBy){
 //		motor[rightMotor] = 50;
 //		motor[leftMotor] = -50;
-//		irVal = SensorValue(IRSeeker);
+//		irVal = HTIRS2readDCDir(IRL);
 //	}
 //}
 
 void turnLeftToIR(int toIR) {
-	int irVal = (SensorValue(IRSeeker));
+	int irVal = (HTIRS2readDCDir(IRL));
 	while(irVal != toIR){
 		motor[leftMotor] = -50;
 		motor[rightMotor] = 50;
-		irVal = SensorValue(IRSeeker);
+		irVal = HTIRS2readDCDir(IRL);
 	}
 }
 
 void turnRightToIR(int toIR) {
-	int irVal = (SensorValue(IRSeeker));
+	int irVal = (HTIRS2readDCDir(IRL));
 	while(irVal != toIR){
 		motor[leftMotor] = 50;
 		motor[rightMotor] = -50;
-		irVal = SensorValue(IRSeeker);
+		irVal = HTIRS2readDCDir(IRL);
 	}
 }
 

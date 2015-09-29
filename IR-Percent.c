@@ -1,7 +1,6 @@
 #pragma config(Sensor, S2,     HTIRS2,         sensorI2CCustom)
 #include "hitechnic-irseeker-v2.h"
 
-
 int irEnhVal(int sp0, int sp1, int sp2, int sp3, int sp4){
 	int initialVal = 0;
 	int realVal = 0;
@@ -64,6 +63,10 @@ task main (){
 	writeDebugStreamLine("irEnhVal(0,0,25,0,0) = %d", irEnhVal(0,0,25,0,0));
 	writeDebugStreamLine("irEnhVal(0,15,25,0,0) = %d", irEnhVal(0,15,25,0,0));
 	writeDebugStreamLine("irEnhVal(0,0,25,25,0) = %d", irEnhVal(0,0,25,25,0));
+	writeDebugStreamLine("irEnhVal(50,34,0,0,0) = %d", irEnhVal(50,34,0,0,0));
+	writeDebugStreamLine("irEnhVal(2,76,23,0,0) = %d", irEnhVal(2,76,23,0,0));
+	writeDebugStreamLine("irEnhVal(0,3,50,42,0) = %d", irEnhVal(0,3,50,42,0));
+	writeDebugStreamLine("irEnhVal(0,0,10,50,20) = %d", irEnhVal(0,0,10,50,20));
 
 	// Create struct to hold sensor data
 	tHTIRS2 irSeeker;
