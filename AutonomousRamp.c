@@ -80,6 +80,6 @@ void autonomousRamp()
 }
 
 task main {
-	waitForStart();
+	//waitForStart();
 	autonomousRamp();
 }

@@ -22,8 +22,8 @@ void driveForward(int timeRunning){
 void driveWithin(int distanceInCm){
 	int sonarVal = SensorValue(sonar);
 	while(sonarVal > distanceInCm){
-		motor[leftMotor] = 45;
-		motor[rightMotor] = 60;
+		motor[leftMotor] = 50;
+		motor[rightMotor] = 50;
 		sonarVal = SensorValue(sonar);
 		//writeDebugStreamLine("the sonar value is %d", sonarVal);
 	}
